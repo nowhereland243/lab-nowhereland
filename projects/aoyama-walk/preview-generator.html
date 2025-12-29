@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        
+        .preview-canvas {
+            width: 1200px;
+            height: 630px;
+            background: #faf9f7;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-size: 200px;
+            opacity: 1;
+        }
+        
+        .preview-canvas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #faf9f7;
+            opacity: 0.97;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 180px;
+        }
+        
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 300;
+            color: #1a1a1a;
+            letter-spacing: 0.02em;
+            margin: 0;
+            margin-bottom: 100px;
+        }
+        
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: #666;
+            letter-spacing: 0.15em;
+            margin: 0;
+        }
+        
+        .path {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 100px;
+        }
+        
+        .seal {
+            position: absolute;
+            bottom: 40px;
+            right: 50px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .instructions {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-family: system-ui;
+            font-size: 14px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <strong>Instructions:</strong><br>
+        1. Take a screenshot of the preview canvas (1200x630px)<br>
+        2. Save it as <code>preview.jpg</code><br>
+        3. Place it in <code>projects/aoyama-walk/</code>
+    </div>
+    
+    <div class="preview-canvas">
+        <div class="content">
+            <h1 class="title">nolan's aoyama recs</h1>
+            <p class="subtitle">an afternoon walk</p>
+        </div>
+        
+        <svg class="path" viewBox="0 0 400 100" preserveAspectRatio="xMidYMid meet">
+            <path d="M 50 50 Q 150 20, 250 50 T 350 50" 
+                  fill="none" 
+                  stroke="#1a1a1a" 
+                  stroke-width="1.5" 
+                  opacity="0.3"
+                  stroke-linecap="round"/>
+        </svg>
+        
+        <svg class="seal" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="26" stroke="#c41e3a" stroke-width="2" fill="none" opacity="0.9"/>
+            <text x="30" y="41" text-anchor="middle" fill="#c41e3a" 
+                  font-family="'Noto Serif JP', serif" font-size="28" font-weight="600">朱</text>
+        </svg>
+    </div>
+</body>
+</html>

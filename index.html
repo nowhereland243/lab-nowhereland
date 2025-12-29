@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowhereland Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #faf9f7;
+            font-family: 'Cormorant Garamond', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: #999;
+            margin-bottom: 60px;
+        }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project-card {
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: #666;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 80px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nowhereland Lab</h1>
+        <p class="subtitle">Experimental Projects</p>
+
+        <div class="projects">
+            <a href="/projects/aoyama-walk" class="project-card">
+                <div class="project-title">Aoyama Walk</div>
+                <p class="project-desc">An immersive walking map of Aoyama, Tokyo. Scroll-based storytelling with Sumi-e aesthetics.</p>
+            </a>
+
+            <!-- Future projects will appear here -->
+        </div>
+
+        <div class="footer">
+            More experiments coming soon
+        </div>
+    </div>
+</body>
+</html>

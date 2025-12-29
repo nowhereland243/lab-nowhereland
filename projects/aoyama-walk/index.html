@@ -290,8 +290,9 @@
 
         /* Scroll Hint */
         .scroll-hint {
-            position: absolute;
-            bottom: 20px;
+            position: fixed; /* Fixed so it's always on screen initially */
+            bottom: 40px;
+            left: 0;
             width: 100%;
             text-align: center;
             font-size: 10px;
@@ -299,8 +300,13 @@
             color: #ccc;
             animation: bounce 2s infinite;
             transition: opacity 0.5s ease;
+            z-index: 20;
+            pointer-events: none;
         }
-        .has-active-node .scroll-hint {
+        
+        /* Hide scroll hint when any node becomes active (user has scrolled) */
+        .has-active-node .scroll-hint, 
+        .footer-active .scroll-hint {
             opacity: 0;
         }
 
@@ -352,7 +358,7 @@
                     <g class="svg-group node-group-1" id="node-1">
                         <ellipse class="ink-blob-svg" cx="80" cy="50" rx="12" ry="11" />
                         <text class="node-number-svg" x="80" y="54" text-anchor="middle">1</text>
-                        <path class="node-icon-svg" d="M210 155 l5 -4 5 4 M212 155 v4 M218 155 v4 M208 159 h14" transform="translate(-130, -105)" />
+                        <path class="node-icon-svg" d="M210 155 l5 -4 5 4 M212 155 v4 M218 155 v4 M208 159 h14" transform="translate(-100, -105)" />
                         <text class="node-label-svg" x="125" y="55">Nezu Museum</text>
                     </g>
                 </a>
@@ -362,7 +368,7 @@
                     <g class="svg-group node-group-2" id="node-2">
                         <ellipse class="ink-blob-svg" cx="240" cy="150" rx="11" ry="12" />
                         <text class="node-number-svg" x="240" y="154" text-anchor="middle">2</text>
-                        <path class="node-icon-svg" d="M125 280 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(110, -130)" />
+                        <path class="node-icon-svg" d="M125 280 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(80, -130)" />
                         <text class="node-label-svg" x="200" y="155" text-anchor="end">Yohji Yamamoto</text>
                     </g>
                 </a>

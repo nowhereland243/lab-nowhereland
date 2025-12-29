@@ -19,7 +19,7 @@
             margin: 0;
             background: #000; /* Dark background behind everything */
             font-family: 'Cormorant Garamond', serif;
-            font-variant: small-caps; /* Apply small caps globally */
+            text-transform: lowercase; /* Apply lowercase globally */
         }
 
         /* The scroll track defines the total scrollable height */
@@ -119,7 +119,6 @@
             color: #bbb;
             transition: color 0.5s ease;
             text-transform: lowercase; /* Ensure this stays lowercase as requested previously, or let small-caps handle it? User asked for small caps. Let's remove text-transform to let small-caps work, or keep it if they want lowercase small caps. */
-            font-variant: small-caps;
         }
 
         /* Dark mode header */
@@ -221,13 +220,12 @@
             transform: translateY(20px);
             transition: all 0.8s ease;
             z-index: 20;
-            pointer-events: none;
+            pointer-events: auto; /* Allow clicking links */
         }
 
         .footer-seal.visible {
             opacity: 1;
             transform: translateY(0);
-            pointer-events: auto; /* Allow clicking links */
         }
 
         .seal-svg {
@@ -398,7 +396,7 @@
                 </g>
             </svg>
             <p class="footer-text">made by nolan with love</p>
-            <a href="https://apps.apple.com/us/app/ubigi-travel-esim-data-plan/id1375857674" target="_blank" class="esim-link">GET HIGH-SPEED INTERNET FOR YOUR Japan Trip and anywhere really</a>
+            <a href="https://apps.apple.com/us/app/ubigi-travel-esim-data-plan/id1375857674" target="_blank" class="esim-link">get high-speed esim (your iphones are compatible) for your tokyo trip and anywhere really</a>
         </div>
 
     </div>

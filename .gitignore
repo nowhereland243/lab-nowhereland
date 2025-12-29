@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Vercel
+.vercel
+
+# OS
+.DS_Store

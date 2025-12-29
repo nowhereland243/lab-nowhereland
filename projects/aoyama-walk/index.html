@@ -321,11 +321,11 @@
         
         <!-- Backgrounds -->
         <div class="bg-layer bg-paper active" id="bg-paper"></div>
-        <div class="bg-layer bg-image" id="bg-1" style="background-image: url('nezu.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-2" style="background-image: url('yohji.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-3" style="background-image: url('issey.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-4" style="background-image: url('cdg.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-5" style="background-image: url('tonkatsu.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-1" data-bg="nezu.jpg"></div>
+        <div class="bg-layer bg-image" id="bg-2" data-bg="yohji.jpg"></div>
+        <div class="bg-layer bg-image" id="bg-3" data-bg="issey.jpg"></div>
+        <div class="bg-layer bg-image" id="bg-4" data-bg="cdg.jpg"></div>
+        <div class="bg-layer bg-image" id="bg-5" data-bg="tonkatsu.jpg"></div>
 
         <!-- Header -->
         <div class="header">
@@ -427,6 +427,17 @@
         const footerSeal = document.getElementById('footerSeal');
         const mapWrapper = document.querySelector('.map-wrapper');
         const nodes = [1, 2, 3, 4, 5];
+
+        // Dynamic Image Path Handling
+        const isLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const basePath = isLocal ? '' : '/projects/aoyama-walk/';
+
+        document.querySelectorAll('.bg-image').forEach(el => {
+            const img = el.getAttribute('data-bg');
+            if (img) {
+                el.style.backgroundImage = `url('${basePath}${img}')`;
+            }
+        });
         
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;

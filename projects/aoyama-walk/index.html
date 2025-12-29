@@ -19,6 +19,7 @@
             margin: 0;
             background: #000; /* Dark background behind everything */
             font-family: 'Cormorant Garamond', serif;
+            font-variant: small-caps; /* Apply small caps globally */
         }
 
         /* The scroll track defines the total scrollable height */
@@ -117,6 +118,8 @@
             letter-spacing: 0.2em;
             color: #bbb;
             transition: color 0.5s ease;
+            text-transform: lowercase; /* Ensure this stays lowercase as requested previously, or let small-caps handle it? User asked for small caps. Let's remove text-transform to let small-caps work, or keep it if they want lowercase small caps. */
+            font-variant: small-caps;
         }
 
         /* Dark mode header */
@@ -224,6 +227,7 @@
         .footer-seal.visible {
             opacity: 1;
             transform: translateY(0);
+            pointer-events: auto; /* Allow clicking links */
         }
 
         .seal-svg {
@@ -243,6 +247,27 @@
         
         .dark-mode .footer-text {
             color: rgba(255,255,255,0.6);
+        }
+
+        .esim-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            border: 1px solid rgba(0,0,0,0.1);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: #555;
+            text-decoration: none;
+            /* text-transform: uppercase; Removed to let small-caps work or user text */
+            background: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .esim-link:hover {
+            border-color: #c41e3a;
+            color: #c41e3a;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         /* Scroll Hint */
@@ -279,11 +304,11 @@
         
         <!-- Backgrounds -->
         <div class="bg-layer bg-paper active" id="bg-paper"></div>
-        <div class="bg-layer bg-image" id="bg-1" style="background-image: url('/projects/aoyama-walk/tonkatsu.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-2" style="background-image: url('/projects/aoyama-walk/nezu.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-3" style="background-image: url('/projects/aoyama-walk/yohji.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-4" style="background-image: url('/projects/aoyama-walk/cdg.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-5" style="background-image: url('/projects/aoyama-walk/issey.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-1" style="background-image: url('tonkatsu.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-2" style="background-image: url('nezu.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-3" style="background-image: url('yohji.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-4" style="background-image: url('cdg.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-5" style="background-image: url('issey.jpg');"></div>
 
         <!-- Header -->
         <div class="header">
@@ -373,6 +398,7 @@
                 </g>
             </svg>
             <p class="footer-text">made by nolan with love</p>
+            <a href="https://apps.apple.com/us/app/ubigi-travel-esim-data-plan/id1375857674" target="_blank" class="esim-link">GET HIGH-SPEED INTERNET FOR YOUR Japan Trip and anywhere really</a>
         </div>
 
     </div>

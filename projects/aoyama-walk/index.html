@@ -176,6 +176,11 @@
             opacity: 1;
             transition: opacity 0.5s ease;
             cursor: pointer;
+            pointer-events: all; /* Ensure clickability */
+        }
+        
+        .svg-group * {
+            pointer-events: all; /* Ensure all child elements are clickable */
         }
 
         /* When a specific location is active */
@@ -206,6 +211,19 @@
             stroke: #fff; /* White icon */
             opacity: 1;
         }
+        
+        /* Reservation hint styling */
+        .reservation-hint {
+            font-size: 11px;
+            font-weight: 400;
+            fill: #fff;
+            letter-spacing: 0.05em;
+            transition: opacity 0.5s ease;
+        }
+        
+        .has-active-node .svg-group.active .reservation-hint {
+            opacity: 0.8 !important;
+        }
 
         /* --- FOOTER SEAL --- */
         .footer-seal {
@@ -220,12 +238,13 @@
             transform: translateY(20px);
             transition: all 0.8s ease;
             z-index: 20;
-            pointer-events: auto; /* Allow clicking links */
+            pointer-events: none; /* Prevent blocking map when not visible */
         }
 
         .footer-seal.visible {
             opacity: 1;
             transform: translateY(0);
+            pointer-events: auto; /* Allow clicking links when visible */
         }
 
         .seal-svg {
@@ -302,11 +321,11 @@
         
         <!-- Backgrounds -->
         <div class="bg-layer bg-paper active" id="bg-paper"></div>
-        <div class="bg-layer bg-image" id="bg-1" style="background-image: url('tonkatsu.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-2" style="background-image: url('nezu.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-3" style="background-image: url('yohji.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-1" style="background-image: url('nezu.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-2" style="background-image: url('yohji.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-3" style="background-image: url('issey.jpg');"></div>
         <div class="bg-layer bg-image" id="bg-4" style="background-image: url('cdg.jpg');"></div>
-        <div class="bg-layer bg-image" id="bg-5" style="background-image: url('issey.jpg');"></div>
+        <div class="bg-layer bg-image" id="bg-5" style="background-image: url('tonkatsu.jpg');"></div>
 
         <!-- Header -->
         <div class="header">
@@ -327,53 +346,54 @@
                 <!-- Path -->
                 <path class="ink-stroke" d="M 80 50 C 120 80, 200 100, 240 150 S 160 220, 100 280 C 60 320, 120 380, 180 400 S 280 450, 240 520 C 200 580, 140 600, 100 650" />
 
-                <!-- Node 1: tonkatsu.jp -->
-                <a href="https://maps.app.goo.gl/kkW54cc4hr48UD7h6" target="_blank">
+                <!-- Node 1: Nezu Museum -->
+                <a href="https://www.google.com/maps/dir/Nezu+Museum,+6+Chome-5-1+Minamiaoyama,+Minato+City,+Tokyo/Yohji+Yamamoto+Aoyama+Store/HOMME+PLISSÉ+ISSEY+MIYAKE+AOYAMA/COMME+des+GARÇONS+Aoyama+Store/tonkatsu.jp+Omotesando/@35.6636266,139.7109782,17z/data=!3m2!4b1!5s0x60188b6027947487:0xbb478ec0d14de7b5!4m32!4m31!1m5!1m1!1s0x60188b6222b06905:0x1b1b9e07246522c1!2m2!1d139.717029!2d35.6621481!1m5!1m1!1s0x60188b610ae7aa95:0x541c11cc3bfa0aba!2m2!1d139.7154109!2d35.6632294!1m5!1m1!1s0x60188b16b8ee67f9:0x73acc5cb40c24027!2m2!1d139.7133234!2d35.6647708!1m5!1m1!1s0x60188b60316d641f:0x7c75c05830338cc1!2m2!1d139.7137412!2d35.6642805!1m5!1m1!1s0x60188d2f03310d7f:0x44ebb24f848e9fda!2m2!1d139.709991!2d35.6644248!3e0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
                     <g class="svg-group node-group-1" id="node-1">
                         <ellipse class="ink-blob-svg" cx="80" cy="50" rx="12" ry="11" />
                         <text class="node-number-svg" x="80" y="54" text-anchor="middle">1</text>
-                        <path class="node-icon-svg" d="M105 55 c0 3 2 5 5 5 s5 -2 5 -5 M108 50 l3 5 M112 50 l-3 5" transform="translate(0, -5)" />
-                        <text class="node-label-svg" x="125" y="55">tonkatsu.jp</text>
+                        <path class="node-icon-svg" d="M210 155 l5 -4 5 4 M212 155 v4 M218 155 v4 M208 159 h14" transform="translate(-130, -105)" />
+                        <text class="node-label-svg" x="125" y="55">Nezu Museum</text>
                     </g>
                 </a>
 
-                <!-- Node 2: Nezu Museum -->
-                <a href="https://maps.app.goo.gl/kkW54cc4hr48UD7h6" target="_blank">
+                <!-- Node 2: Yohji Yamamoto -->
+                <a href="https://www.google.com/maps/dir/Nezu+Museum,+6+Chome-5-1+Minamiaoyama,+Minato+City,+Tokyo/Yohji+Yamamoto+Aoyama+Store/HOMME+PLISSÉ+ISSEY+MIYAKE+AOYAMA/COMME+des+GARÇONS+Aoyama+Store/tonkatsu.jp+Omotesando/@35.6636266,139.7109782,17z/data=!3m2!4b1!5s0x60188b6027947487:0xbb478ec0d14de7b5!4m32!4m31!1m5!1m1!1s0x60188b6222b06905:0x1b1b9e07246522c1!2m2!1d139.717029!2d35.6621481!1m5!1m1!1s0x60188b610ae7aa95:0x541c11cc3bfa0aba!2m2!1d139.7154109!2d35.6632294!1m5!1m1!1s0x60188b16b8ee67f9:0x73acc5cb40c24027!2m2!1d139.7133234!2d35.6647708!1m5!1m1!1s0x60188b60316d641f:0x7c75c05830338cc1!2m2!1d139.7137412!2d35.6642805!1m5!1m1!1s0x60188d2f03310d7f:0x44ebb24f848e9fda!2m2!1d139.709991!2d35.6644248!3e0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
                     <g class="svg-group node-group-2" id="node-2">
                         <ellipse class="ink-blob-svg" cx="240" cy="150" rx="11" ry="12" />
                         <text class="node-number-svg" x="240" y="154" text-anchor="middle">2</text>
-                        <path class="node-icon-svg" d="M210 155 l5 -4 5 4 M212 155 v4 M218 155 v4 M208 159 h14" transform="translate(0, -5)" />
-                        <text class="node-label-svg" x="200" y="155" text-anchor="end">Nezu Museum</text>
+                        <path class="node-icon-svg" d="M125 280 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(110, -130)" />
+                        <text class="node-label-svg" x="200" y="155" text-anchor="end">Yohji Yamamoto</text>
                     </g>
                 </a>
 
-                <!-- Node 3: Yohji Yamamoto -->
-                <a href="https://maps.app.goo.gl/kkW54cc4hr48UD7h6" target="_blank">
+                <!-- Node 3: Issey Miyake -->
+                <a href="https://www.google.com/maps/dir/Nezu+Museum,+6+Chome-5-1+Minamiaoyama,+Minato+City,+Tokyo/Yohji+Yamamoto+Aoyama+Store/HOMME+PLISSÉ+ISSEY+MIYAKE+AOYAMA/COMME+des+GARÇONS+Aoyama+Store/tonkatsu.jp+Omotesando/@35.6636266,139.7109782,17z/data=!3m2!4b1!5s0x60188b6027947487:0xbb478ec0d14de7b5!4m32!4m31!1m5!1m1!1s0x60188b6222b06905:0x1b1b9e07246522c1!2m2!1d139.717029!2d35.6621481!1m5!1m1!1s0x60188b610ae7aa95:0x541c11cc3bfa0aba!2m2!1d139.7154109!2d35.6632294!1m5!1m1!1s0x60188b16b8ee67f9:0x73acc5cb40c24027!2m2!1d139.7133234!2d35.6647708!1m5!1m1!1s0x60188b60316d641f:0x7c75c05830338cc1!2m2!1d139.7137412!2d35.6642805!1m5!1m1!1s0x60188d2f03310d7f:0x44ebb24f848e9fda!2m2!1d139.709991!2d35.6644248!3e0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
                     <g class="svg-group node-group-3" id="node-3">
                         <ellipse class="ink-blob-svg" cx="100" cy="280" rx="12" ry="11" />
                         <text class="node-number-svg" x="100" y="284" text-anchor="middle">3</text>
-                        <path class="node-icon-svg" d="M125 280 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(0, -5)" />
-                        <text class="node-label-svg" x="140" y="285">Yohji Yamamoto</text>
+                        <path class="node-icon-svg" d="M125 650 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(0, -375)" />
+                        <text class="node-label-svg" x="140" y="285">Issey Miyake</text>
                     </g>
                 </a>
 
                 <!-- Node 4: Comme des Garçons -->
-                <a href="https://maps.app.goo.gl/kkW54cc4hr48UD7h6" target="_blank">
+                <a href="https://www.google.com/maps/dir/Nezu+Museum,+6+Chome-5-1+Minamiaoyama,+Minato+City,+Tokyo/Yohji+Yamamoto+Aoyama+Store/HOMME+PLISSÉ+ISSEY+MIYAKE+AOYAMA/COMME+des+GARÇONS+Aoyama+Store/tonkatsu.jp+Omotesando/@35.6636266,139.7109782,17z/data=!3m2!4b1!5s0x60188b6027947487:0xbb478ec0d14de7b5!4m32!4m31!1m5!1m1!1s0x60188b6222b06905:0x1b1b9e07246522c1!2m2!1d139.717029!2d35.6621481!1m5!1m1!1s0x60188b610ae7aa95:0x541c11cc3bfa0aba!2m2!1d139.7154109!2d35.6632294!1m5!1m1!1s0x60188b16b8ee67f9:0x73acc5cb40c24027!2m2!1d139.7133234!2d35.6647708!1m5!1m1!1s0x60188b60316d641f:0x7c75c05830338cc1!2m2!1d139.7137412!2d35.6642805!1m5!1m1!1s0x60188d2f03310d7f:0x44ebb24f848e9fda!2m2!1d139.709991!2d35.6644248!3e0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
                     <g class="svg-group node-group-4" id="node-4">
                         <ellipse class="ink-blob-svg" cx="180" cy="400" rx="11" ry="12" />
                         <text class="node-number-svg" x="180" y="404" text-anchor="middle">4</text>
                         <path class="node-icon-svg" d="M205 400 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(0, -5)" />
-                        <text class="node-label-svg" x="220" y="405">Comme des Garçons</text>
+                        <text class="node-label-svg" x="160" y="405" text-anchor="end">Comme des Garçons</text>
                     </g>
                 </a>
 
-                <!-- Node 5: Issey Miyake -->
-                <a href="https://maps.app.goo.gl/kkW54cc4hr48UD7h6" target="_blank">
+                <!-- Node 5: tonkatsu.jp -->
+                <a href="https://www.tablecheck.com/en/tonkatsujp/reserve/message" target="_blank">
                     <g class="svg-group node-group-5" id="node-5">
                         <ellipse class="ink-blob-svg" cx="100" cy="650" rx="12" ry="11" />
                         <text class="node-number-svg" x="100" y="654" text-anchor="middle">5</text>
-                        <path class="node-icon-svg" d="M125 650 a3 3 0 0 0 -3 3 v1 l-4 3 l8 3 l8 -3 l-4 -3 v-1" transform="translate(0, -5)" />
-                        <text class="node-label-svg" x="140" y="655">Issey Miyake</text>
+                        <path class="node-icon-svg" d="M105 55 c0 3 2 5 5 5 s5 -2 5 -5 M108 50 l3 5 M112 50 l-3 5" transform="translate(20, 595)" />
+                        <text class="node-label-svg" x="140" y="655">tonkatsu.jp</text>
+                        <text class="reservation-hint" x="140" y="672" opacity="0">must reserve dinner ahead →</text>
                     </g>
                 </a>
             </svg>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nowhereland Lab</title>
+    <title>lab nowhereland</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
         body {
             min-height: 100vh;
             background: #faf9f7;
-            font-family: 'Cormorant Garamond', serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,9 +24,70 @@
             padding: 40px 20px;
         }
 
-        .container {
+        /* --- LOGIN SCREEN STYLES --- */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #faf9f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .lab-title {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .password-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+            width: 150px;
+            outline: none;
+            color: #333;
+            letter-spacing: 0.1em;
+        }
+
+        .password-input::placeholder {
+            color: #ccc;
+            font-size: 10px;
+        }
+
+        .error-msg {
+            margin-top: 10px;
+            font-size: 10px;
+            color: red;
+            opacity: 0;
+            transition: opacity 0.3s;
+            height: 12px;
+        }
+
+        /* --- MAIN CONTENT STYLES (Hidden by default) --- */
+        #app-content {
+            display: none;
+            width: 100%;
             max-width: 600px;
             text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -91,7 +151,16 @@
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen">
+        <div class="lab-title">lab nowhereland</div>
+        <input type="password" id="password" class="password-input" placeholder="enter password" autocomplete="off">
+        <div class="error-msg" id="error-msg">access denied</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="app-content">
         <h1>Nowhereland Lab</h1>
         <p class="subtitle">Experimental Projects</p>
 
@@ -100,7 +169,6 @@
                 <div class="project-title">Aoyama Walk</div>
                 <p class="project-desc">An immersive walking map of Aoyama, Tokyo. Scroll-based storytelling with Sumi-e aesthetics.</p>
             </a>
-
             <!-- Future projects will appear here -->
         </div>
 
@@ -108,5 +176,54 @@
             More experiments coming soon
         </div>
     </div>
+
+    <script>
+        const loginScreen = document.getElementById('login-screen');
+        const appContent = document.getElementById('app-content');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('error-msg');
+
+        // Check if already logged in (optional, but nice)
+        if (sessionStorage.getItem('lab_access') === 'granted') {
+            loginScreen.style.display = 'none';
+            appContent.style.display = 'block';
+        }
+
+        passwordInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Also check on input for smoother feel if they type it fast? 
+        // No, let's wait for Enter or just check every change? 
+        // Let's check on input to be "hacker-like" - instant unlock
+        passwordInput.addEventListener('input', () => {
+            if (passwordInput.value === 'welovenolan') {
+                unlock();
+            } else {
+                errorMsg.style.opacity = '0';
+            }
+        });
+
+        function checkPassword() {
+            if (passwordInput.value === 'welovenolan') {
+                unlock();
+            } else {
+                errorMsg.style.opacity = '1';
+                passwordInput.value = '';
+            }
+        }
+
+        function unlock() {
+            sessionStorage.setItem('lab_access', 'granted');
+            loginScreen.style.opacity = '0';
+            loginScreen.style.pointerEvents = 'none';
+            setTimeout(() => {
+                loginScreen.style.display = 'none';
+                appContent.style.display = 'block';
+            }, 500);
+        }
+    </script>
 </body>
 </html>

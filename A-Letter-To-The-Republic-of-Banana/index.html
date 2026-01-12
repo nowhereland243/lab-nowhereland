@@ -105,17 +105,42 @@
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
             body {
-                padding: 20px 15px;
-                font-size: 16px;
+                padding: 40px 28px; /* More generous side padding */
+                font-size: 15px;
+            }
+
+            .container {
+                max-width: 100%;
             }
 
             header {
-                margin-bottom: 30px;
+                margin-bottom: 35px;
+            }
+
+            header img {
+                max-width: 90%; /* Slightly smaller header on mobile */
+            }
+
+            p {
+                margin-bottom: 1.3em;
+                line-height: 1.7; /* More breathing room */
+            }
+
+            ul {
+                padding-left: 24px;
             }
             
             .sign-off {
-                text-align: left; /* Often better on mobile */
-                margin-top: 40px;
+                text-align: right;
+                margin-top: 50px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            body {
+                padding: 30px 24px;
+                font-size: 14px;
             }
         }
     </style>

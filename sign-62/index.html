@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>济公灵签 · Sign 62</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1510;
+    --ink-light: #3D3530;
+    --rust: #B85C3A;
+    --gold: #C9A96E;
+    --gold-light: #E8D5A8;
+    --muted: #8C7E72;
+    --border: rgba(201,169,110,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .sign-number {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.2s;
+  }
+
+  .title-chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+
+  .title-english {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-top: 1rem;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.8s;
+  }
+
+  .configuration {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 3rem 0 3.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1s;
+  }
+
+  .config-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .config-char {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.4rem;
+    color: var(--rust);
+  }
+
+  .config-en {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .config-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Poem block */
+  .poem-block {
+    border: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+    background: rgba(250,248,244,0.6);
+  }
+
+  .poem-block::before,
+  .poem-block::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+
+  .poem-block::before {
+    top: -1px; left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+
+  .poem-block::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 1px 1px 0;
+  }
+
+  .poem-line-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    line-height: 2.2;
+    font-weight: 300;
+  }
+
+  .poem-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem auto;
+  }
+
+  .poem-line-en {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    color: var(--muted);
+    font-style: italic;
+    line-height: 2.2;
+    letter-spacing: 0.02em;
+  }
+
+  /* Main content */
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 7rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 6rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-label-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--rust);
+  }
+
+  .section-label-en {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section-label-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .body-text {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 2;
+    color: var(--ink-light);
+    font-weight: 300;
+  }
+
+  .body-text em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Image breakdown */
+  .image-card {
+    margin: 2.5rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .image-card-verse {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+  }
+
+  .image-card-trans {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .image-card-body {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+  }
+
+  /* Domain grid */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  .domain-item {
+    background: var(--warm-white);
+    padding: 1.8rem 1.6rem;
+    transition: background 0.3s ease;
+  }
+
+  .domain-item:hover {
+    background: var(--cream);
+  }
+
+  .domain-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .domain-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+  }
+
+  .domain-en {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .domain-key {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .domain-body {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    padding: 6rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .closing-quote {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.8;
+    max-width: 540px;
+    margin: 0 auto 2rem;
+  }
+
+  .closing-chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    color: var(--rust);
+    letter-spacing: 0.2em;
+    margin-bottom: 2.5rem;
+  }
+
+  .closing-note {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .gold-ornament {
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    display: block;
+    margin: 2rem auto;
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 2s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Highlight word */
+  .hl {
+    color: var(--rust);
+    font-style: normal;
+  }
+
+  .hl-cn {
+    font-family: 'Noto Serif SC', serif;
+    color: var(--rust);
+    font-style: normal;
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .poem-block { padding: 2rem 1.5rem; }
+    .domain-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="sign-number">济公灵签 · The 62nd Sign · 水木金</p>
+  <h1 class="title-chinese">第六十二签</h1>
+  <p class="title-english">Ji Gong Oracle — Drawn in China, carried across distance</p>
+
+  <div class="configuration">
+    <div class="config-element">
+      <span class="config-char">水</span>
+      <span class="config-en">Water</span>
+    </div>
+    <div class="config-dot"></div>
+    <div class="config-element">
+      <span class="config-char">木</span>
+      <span class="config-en">Wood</span>
+    </div>
+    <div class="config-dot"></div>
+    <div class="config-element">
+      <span class="config-char">金</span>
+      <span class="config-en">Metal</span>
+    </div>
+  </div>
+
+  <div class="poem-block">
+    <div class="poem-line-cn">曾从海上去营求，</div>
+    <div class="poem-line-cn">七尺珊瑚纲底收。</div>
+    <div class="poem-line-cn">卖得黄金千离溢，</div>
+    <div class="poem-line-cn">安居气业德何忧。</div>
+    <div class="poem-divider"></div>
+    <div class="poem-line-en">Once I went out upon the sea in search and pursuit,</div>
+    <div class="poem-line-en">Seven feet of coral, gathered from beneath the net.</div>
+    <div class="poem-line-en">Selling it yielded gold in the thousands, overflowing,</div>
+    <div class="poem-line-en">Settled in home and livelihood and virtue — what worry remains?</div>
+  </div>
+
+  <p class="scroll-hint">Scroll to read</p>
+</section>
+
+<!-- CORE MEANING -->
+<main class="content">
+
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-cn">核心寓意</span>
+      <span class="section-label-en">Core Meaning</span>
+      <div class="section-label-line"></div>
+    </div>
+    <p class="body-text">
+      This sign, arranged in the configuration of <em class="hl-cn">水木金</em> — Water, Wood, Metal — forms a pattern of <em>平稳中蕴含生机</em>, stability containing within it the seed of vitality. It signifies that through earnest <em class="hl-cn">营求</em> — effort in deliberate pursuit — abundant return becomes possible, provided one holds to <em class="hl-cn">惜福</em>, gratitude for one's blessings, and continues to cultivate <em class="hl-cn">善德</em>, virtue and goodness.
+    </p>
+    <br>
+    <p class="body-text">
+      The opening lines carry the image of one who ventures far across the <em class="hl-cn">海</em> sea, labors without certainty, and at last draws up something rare and precious from the deep. The lines that follow affirm that wealth, once honestly gathered, becomes the foundation of <em class="hl-cn">安居乐业</em> — a life settled, purposeful, and at peace. But the sign is careful: <em class="hl-cn">德</em> virtue is the condition, not a footnote. Without it, the gold does not hold.
+    </p>
+  </section>
+
+  <!-- IMAGE BY IMAGE -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-cn">意象解析</span>
+      <span class="section-label-en">Image by Image</span>
+      <div class="section-label-line"></div>
+    </div>
+
+    <div class="image-card">
+      <div class="image-card-verse">曾从海上去营求，七尺珊瑚纲底收</div>
+      <div class="image-card-trans">"Once I went out upon the sea in search and pursuit — seven feet of coral, gathered from beneath the net"</div>
+      <p class="image-card-body">This is the image of effort meeting reward. One does not find <em class="hl-cn">珊瑚</em> coral by waiting on the shore. It must be sought, dragged up from depth, at cost — through the <em class="hl-cn">纲</em>, the weighted net cast into darkness. The return, when it comes, is proportionate to the reach.</p>
+    </div>
+
+    <div class="image-card">
+      <div class="image-card-verse">卖得黄金千离溢，安居气业德何忧</div>
+      <div class="image-card-trans">"Selling it yielded gold in the thousands, overflowing — settled in home and livelihood and virtue, what worry remains?"</div>
+      <p class="image-card-body">Once wealth accumulates through honest labor, <em class="hl-cn">安居</em> — true settledness — becomes possible. But the final word is <em class="hl-cn">德</em>, virtue. The question <em class="hl-cn">何忧</em> — <em>what worry remains?</em> — is almost a challenge: anxiety finds no foothold in a person who has earned what they hold and carried goodness through the earning of it.</p>
+    </div>
+  </section>
+
+  <!-- DOMAINS -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-label-cn">各领域指引</span>
+      <span class="section-label-en">Domain by Domain</span>
+      <div class="section-label-line"></div>
+    </div>
+
+    <div class="domain-grid">
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">财运</span>
+          <span class="domain-en">Wealth</span>
+        </div>
+        <div class="domain-key">目下正亨</div>
+        <p class="domain-body">The current moment is genuinely auspicious. Overseas enterprise and trade across distance are particularly favored. When the gain arrives, practice <em class="hl-cn">惜福</em> — honor what you've received. Do not press for more before giving thanks.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">功名</span>
+          <span class="domain-en">Ambition & Career</span>
+        </div>
+        <div class="domain-key">种于出洋，洋财为命</div>
+        <p class="domain-body">Your fortune lies in going outward — across distance, into unfamiliar territory. What feels like displacement may be the very condition of your success. The sea is not a barrier; it is the path.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">婚姻</span>
+          <span class="domain-en">Marriage</span>
+        </div>
+        <div class="domain-key">天赐良缘</div>
+        <p class="domain-body">A fitting match awaits — one carrying the quality of <em class="hl-cn">天赐</em>, heaven-given, not forced or arranged. Do not manufacture it. It arrives in its own time, to someone already <em class="hl-cn">安居</em>, settled within themselves.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">疾病</span>
+          <span class="domain-en">Illness</span>
+        </div>
+        <div class="domain-key">转危为安</div>
+        <p class="domain-body">Attentive, patient care is the way through. The trajectory bends toward recovery. Hold a calm mind; the turn from <em class="hl-cn">危</em> danger toward <em class="hl-cn">安</em> safety is already in motion.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">迁移</span>
+          <span class="domain-en">Relocation</span>
+        </div>
+        <div class="domain-key">宜于秋令，速行则败</div>
+        <p class="domain-body">Autumn is the favorable season for any move. To act in haste is to invite failure. Let the timing ripen. Urgency here is the one thing that could undo what is otherwise a favorable crossing.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">谋事</span>
+          <span class="domain-en">Plans & Undertakings</span>
+        </div>
+        <div class="domain-key">小心谋之，运动即成</div>
+        <p class="domain-body">Think carefully, then move with full commitment. Deliberate strategy combined with genuine action will carry you through. Neither <em class="hl-cn">小心</em> caution nor <em class="hl-cn">运动</em> momentum alone is sufficient.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">词讼</span>
+          <span class="domain-en">Disputes</span>
+        </div>
+        <div class="domain-key">以和为贵</div>
+        <p class="domain-body">Let harmony be your governing principle. Do not press for victory. The matter resolves sooner than expected for those who do not fan the flame. <em class="hl-cn">不久平息</em>.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">生意</span>
+          <span class="domain-en">Business</span>
+        </div>
+        <div class="domain-key">同人暗算</div>
+        <p class="domain-body">Be alert. Not every adversary announces themselves; some move quietly from within the circle of familiarity. Keep agreements explicit, trust measured, and arrangements protected.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">行人</span>
+          <span class="domain-en">The Traveler</span>
+        </div>
+        <div class="domain-key">满载而归</div>
+        <p class="domain-body">Whoever is away moves in good fortune. They return well — <em class="hl-cn">满载</em>, laden with what they set out to find.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">生育</span>
+          <span class="domain-en">Childbirth</span>
+        </div>
+        <div class="domain-key">生产娇女，更兼神佑</div>
+        <p class="domain-body">There is cause for joy. A daughter is indicated, and with her, the quiet protection of <em class="hl-cn">神佑</em> — something larger than circumstance watching over the household.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">失物</span>
+          <span class="domain-en">Lost Objects</span>
+        </div>
+        <div class="domain-key">可卜珠还</div>
+        <p class="domain-body">Recovery is possible. What was lost may yet return, like a pearl finding its way back. But take this as instruction: strengthen your <em class="hl-cn">关</em> — your gates, your safeguards — so the loss need not repeat.</p>
+      </div>
+
+      <div class="domain-item">
+        <div class="domain-title">
+          <span class="domain-cn">田畜</span>
+          <span class="domain-en">Land & Livestock</span>
+        </div>
+        <div class="domain-key">经营小利</div>
+        <p class="domain-body">No cause for anxiety. Tend what you have with care and attention; modest, steady returns will follow without drama. Overthinking is the only real obstacle.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- CLOSING -->
+<footer class="closing">
+  <span class="gold-ornament">· · ·</span>
+  <div class="closing-chinese">安居气业德何忧</div>
+  <p class="closing-quote">
+    Settle into your life, tend your work, hold your goodness.<br>
+    <em>What, then, is there to fear?</em>
+  </p>
+  <p class="closing-note">
+    Drawn by your mother in China · Carried across the 缘 · The 62nd Sign
+  </p>
+  <span class="gold-ornament">· · ·</span>
+</footer>
+
+<!-- FULL CHINESE TEXT -->
+<section class="cn-full">
+  <div class="cn-full-inner">
+
+    <div class="cn-header">
+      <span class="cn-header-label">原文全解</span>
+      <div class="cn-header-line"></div>
+    </div>
+
+    <div class="cn-block">
+      <h2 class="cn-title">济公灵签第六十二签</h2>
+      <p class="cn-sub">签文排列：水木金</p>
+    </div>
+
+    <div class="cn-block">
+      <h3 class="cn-section-title">签文内容</h3>
+      <div class="cn-verse">
+        <p>曾从海上去营求，</p>
+        <p>七尺珊瑚纲底收。</p>
+        <p>卖得黄金千离溢，</p>
+        <p>安居气业德何忧。</p>
+      </div>
+    </div>
+
+    <div class="cn-block">
+      <h3 class="cn-section-title">核心寓意</h3>
+      <p class="cn-body">此签以"水木金"的排列，形成一种平稳中蕴含生机的格局，象征着通过努力经营可获得丰厚回报，且需保持知足与善德。签文中的"曾从海上去营求，七尺珊瑚纲底收"表达了远赴海外、辛苦营求后终有所获的意象，"卖得黄金千离溢，安居气业德何忧"则进一步强调了财富积累与安居乐业的成果，同时提醒人们应珍惜福报、行善积德。</p>
+    </div>
+
+    <div class="cn-block">
+      <h3 class="cn-section-title">意象解析</h3>
+      <div class="cn-image-item">
+        <p class="cn-image-verse">曾从海上去营求，七尺珊瑚纲底收</p>
+        <p class="cn-body">象征着付出努力后终能获得丰厚的回报，如同在海底打捞到珍贵的珊瑚。</p>
+      </div>
+      <div class="cn-image-item">
+        <p class="cn-image-verse">卖得黄金千离溢，安居气业德何忧</p>
+        <p class="cn-body">表示财富积累后，可安居乐业，生活无忧，但需保持善德，方能长久。</p>
+      </div>
+    </div>
+
+    <div class="cn-block">
+      <h3 class="cn-section-title">各领域指引</h3>
+
+      <div class="cn-domain-grid">
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">财运</div>
+          <p class="cn-body">目下正亨，海外经营更佳，得财后惜福。财运方面运势亨通，海外经营或远途贸易更为有利，但需珍惜所得，不可贪多。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">功名</div>
+          <p class="cn-body">种于出洋，洋财为命。在功名方面，若有机会远赴他乡或海外发展，将有助于事业的成功和财富的积累。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">生育</div>
+          <p class="cn-body">生产娇女，更兼神佑。生育方面有喜讯，有望喜得千金，且得神灵庇佑。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">词讼</div>
+          <p class="cn-body">以和为贵，不久平息。在诉讼方面，应以和为贵，避免争斗，不久之后将能平息纠纷。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">谋事</div>
+          <p class="cn-body">小心谋之，运动即成。谋划事情时，应谨慎思考，积极行动，必能取得成功。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">失物</div>
+          <p class="cn-body">可卜珠还，嗣后设关。丢失的物品有望找回，但需加强防范，避免再次丢失。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">田畜</div>
+          <p class="cn-body">不用多思，经营小利。在农业和畜牧业方面，无需过多忧虑，只需用心经营，即可获得小利。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">婚姻</div>
+          <p class="cn-body">可得佳偶，天赐良缘。婚姻方面有望遇到合适的伴侣，是天赐的良缘。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">疾病</div>
+          <p class="cn-body">悉心调治，转危为安。疾病方面需悉心调治，保持积极心态，必能转危为安。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">迁移</div>
+          <p class="cn-body">宜于秋令，速行则败。迁移方面，秋季为宜，但不宜急于行动，否则可能遭遇失败。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">行人</div>
+          <p class="cn-body">行运之际，满载而归。出行的人将行运亨通，满载而归。</p>
+        </div>
+
+        <div class="cn-domain-item">
+          <div class="cn-domain-head">生意</div>
+          <p class="cn-body">同人暗算，利息微薄。在生意方面需小心防范他人的暗算，以免利润微薄。</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .cn-full {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 7rem 2rem;
+  }
+
+  .cn-full-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .cn-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 4rem;
+  }
+
+  .cn-header-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .cn-header-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(201,169,110,0.2);
+  }
+
+  .cn-block {
+    margin-bottom: 4rem;
+  }
+
+  .cn-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+
+  .cn-sub {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  .cn-section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+
+  .cn-verse {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.05rem, 3vw, 1.3rem);
+    line-height: 2.4;
+    letter-spacing: 0.12em;
+    color: var(--gold-light);
+    padding-left: 1rem;
+    border-left: 2px solid var(--rust);
+  }
+
+  .cn-body {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(0.88rem, 2vw, 1rem);
+    line-height: 2.1;
+    color: rgba(245,240,232,0.7);
+    font-weight: 300;
+  }
+
+  .cn-image-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .cn-image-item:last-child {
+    border-bottom: none;
+  }
+
+  .cn-image-verse {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.95rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+  }
+
+  .cn-domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5px;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .cn-domain-item {
+    background: rgba(26,21,16,0.95);
+    padding: 1.6rem 1.4rem;
+    transition: background 0.3s ease;
+  }
+
+  .cn-domain-item:hover {
+    background: rgba(40,32,24,0.95);
+  }
+
+  .cn-domain-head {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1rem;
+    color: var(--rust);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .cn-domain-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Intersection observer for scroll animations
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
